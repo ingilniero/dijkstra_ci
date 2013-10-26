@@ -31,8 +31,6 @@ class Graph
     visited[node] = true
   end
 
-
-
   def overwrite_distance_for(node, neighbor, cost)
     update_distance_for(neighbor, cost)
     update_nodes(neighbor, node)

@@ -14,4 +14,8 @@ class Edge
   def goal
     destination.name
   end
+
+  def has_node?(node)
+    origin == node
+  end
 end

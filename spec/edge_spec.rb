@@ -22,4 +22,10 @@ describe Edge do
       expect(subject.goal).to eq '2'
     end
   end
+
+  describe '#has_node?' do
+    it 'checks if a node exists in the enge' do
+      expect(subject.has_node?('1')).to be_true
+    end
+  end
 end
