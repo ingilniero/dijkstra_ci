@@ -8,34 +8,11 @@ class Dijkstra
     @shortest_path = []
   end
 
-
-  def calc_shortest_path(source_node, destination_node)
+  def calc_shortest_path(source_node)
     graph.clear
-
-    add_to_buffer(source_node)
-
     graph.init(source_node)
-
-    until @buffer.empty?
-      current_node = @buffer.shift.name
-
-      unless visited?(current_node)
-
-        graph.routes.each do |route|
-
-          if route.origin == current_node
-            neighbor = route.goal
-            cost = route.cost
-
-            unless visited?(neighbor)
-              update_distance_for current_node, neighbor, cost
-            end
-          end
-          graph.check(current_node)
-        end
-      end
-
-    end
+    add_to_buffer(source_node)
+    next_node @buffer.shift.name until @buffer.empty?
   end
 
   def get_shortest_path_for(destination)
@@ -49,13 +26,25 @@ class Dijkstra
 
   private
 
+  def next_node(current_node)
+    unless visited?(current_node)
+      graph.routes.each do |route|
+        acts_on_node(current_node, route) if route.has_node? current_node
+        graph.check(current_node)
+      end
+    end
+  end
+
+  def acts_on_node(current_node, edge)
+    unless visited?(edge.goal)
+      update_distance_for current_node, edge.goal, edge.cost
+      add_to_buffer(edge.goal)
+    end
+  end
+
   def update(current_node, neighbor, updated_cost)
-
     if has_lower_cost?(current_node, updated_cost)
-
       graph.overwrite_distance_for(current_node, neighbor, updated_cost)
-
-      add_to_buffer(neighbor)
     end
   end
 

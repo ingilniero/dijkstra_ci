@@ -21,7 +21,7 @@ describe Dijkstra do
       graph.add_path 'three', 'four' , 11
       graph.add_path 'three', 'six'  , 2
 
-      dijkstra.calc_shortest_path('one', 'five')
+      dijkstra.calc_shortest_path('one')
       dijkstra.get_shortest_path_for('five')
     end
 
