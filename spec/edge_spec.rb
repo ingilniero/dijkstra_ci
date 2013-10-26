@@ -10,4 +10,16 @@ describe Edge do
   it 'has a cost' do
     expect(subject.cost).to eq 3
   end
+
+  describe '#origin' do
+    it 'returns the name of the source' do
+      expect(subject.origin).to eq '1'
+    end
+  end
+
+  describe '#goal' do
+    it 'returns the name of the destination' do
+      expect(subject.goal).to eq '2'
+    end
+  end
 end

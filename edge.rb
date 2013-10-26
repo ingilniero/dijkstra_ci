@@ -6,4 +6,12 @@ class Edge
     @destination = destination
     @cost = cost
   end
+
+  def origin
+    source.name
+  end
+
+  def goal
+    destination.name
+  end
 end
