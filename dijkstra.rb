@@ -1,6 +1,6 @@
 class Dijkstra
 
-  attr_reader :buffer, :graph, :shortest_path
+  attr_reader :graph, :shortest_path
 
   def initialize(graph)
     @graph = graph

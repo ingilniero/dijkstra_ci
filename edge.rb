@@ -1,5 +1,6 @@
 class Edge
-  attr_accessor :source, :destination, :cost
+
+  attr_reader :source, :destination, :cost
 
   def initialize(source, destination, cost)
     @source = source
