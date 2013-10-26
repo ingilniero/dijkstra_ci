@@ -1,28 +1,34 @@
+require 'pry'
 require 'dijkstra'
 require 'graph'
+require 'edge'
 require 'node'
 
 describe Dijkstra do
-  let(:graph) { Graph.new }
+  let!(:graph) { Graph.new }
 
-  it 'receives a graph' do
-    expect{ Dijkstra.new graph }.to be_true
-  end
+  let(:dijkstra) { Dijkstra.new graph }
 
-  describe '#setup' do
-    subject { Dijkstra.new graph }
+  describe '#calculate_shortest_path' do
+    before do
+      graph.add_path 'one'  , 'three', 9
+      graph.add_path 'two'  , 'three', 10
+      graph.add_path 'one'  , 'two'  , 7
+      graph.add_path 'six'  , 'five' , 9
+      graph.add_path 'six'  , 'one'  , 14
+      graph.add_path 'two'  , 'four' , 15
+      graph.add_path 'four' , 'five' , 6
+      graph.add_path 'three', 'four' , 11
+      graph.add_path 'three', 'six'  , 2
 
-    before { subject.setup("1", "6") }
-
-    it 'setups an initial node' do
-      expect(subject.initial_node).to be_kind_of(Node)
+      dijkstra.calc_shortest_path('one', 'five')
+      dijkstra.get_shortest_path_for('five')
     end
 
-    it 'setups a finish node' do
-      expect(subject.finish_node).to be_kind_of(Node)
+    it 'returns the shortest path' do
+      expect(dijkstra.shortest_path).to eq %w{ one three six five }
     end
+
   end
-  it 'receives a finish node'
-  it 'calculates the shortest path'
-  it 'returns the shortest path'
+
 end
